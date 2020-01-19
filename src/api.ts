@@ -5,7 +5,7 @@ interface ServerResponse {
   data: Array<TickerPrice>;
 }
 
-export interface TickerPrice {
+export interface TickerPrice { // TODO move it elsewhere
   name: string;
   data: number;
   open: string;
@@ -17,7 +17,7 @@ export interface TickerPrice {
 
 export const getPrices = (ticker: string) => {
   return axios
-    .get<ServerResponse>(`${API_URL}/stock-prices`, {
+    .get(`${API_URL}/stock-prices`, {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -26,7 +26,7 @@ export const getPrices = (ticker: string) => {
         port: 3000,
       },
       // TODO one day i will provide data, status and other, so simple r => r won't work
-      transformResponse: (r: Array<TickerPrice>) => r,
+      transformResponse: (r) => JSON.parse(r),
     })
     .then(response => {
       return response.data;

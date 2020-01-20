@@ -5,7 +5,7 @@ interface ServerResponse {
   data: Array<TickerPrice>;
 }
 
-export interface TickerPrice { // TODO move it elsewhere
+export interface TickerPriceBackend { // TODO move it elsewhere
   name: string;
   data: number;
   open: string;
@@ -15,9 +15,21 @@ export interface TickerPrice { // TODO move it elsewhere
   min: string;
 }
 
+export interface TickerPrice { // TODO move it elsewhere
+  name: string;
+  data: number;
+  open: number;
+  close: number;
+  volume: number;
+  max: number;
+  min: number;
+}
+
+type Ticker = TickerPriceBackend | TickerPrice;
+
 export const getPrices = (ticker: string) => {
   return axios
-    .get(`${API_URL}/stock-prices`, {
+    .get(`${API_URL}/stock-prices?${ticker}`, {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -25,11 +37,17 @@ export const getPrices = (ticker: string) => {
         host: '127.0.0.1',
         port: 3000,
       },
-      // TODO one day i will provide data, status and other, so simple r => r won't work
       transformResponse: (r) => JSON.parse(r),
     })
     .then(response => {
-      return response.data;
+      // TODO error handler
+      return response.data.map((el: Ticker) => {
+        el.open = Number(el.open);
+        el.close = Number(el.close);
+        el.min = Number(el.min);
+        el.max = Number(el.max);
+        return el;
+      });
     });
 };
 

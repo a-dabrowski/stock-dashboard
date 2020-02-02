@@ -7,7 +7,7 @@ interface ServerResponse {
 
 export interface TickerPriceBackend { // TODO move it elsewhere
   name: string;
-  data: number;
+  date: number;
   open: string;
   close: string;
   volume: string;
@@ -17,7 +17,7 @@ export interface TickerPriceBackend { // TODO move it elsewhere
 
 export interface TickerPrice { // TODO move it elsewhere
   name: string;
-  data: number;
+  date: number;
   open: number;
   close: number;
   volume: number;

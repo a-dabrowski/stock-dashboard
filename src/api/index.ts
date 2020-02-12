@@ -1,11 +1,23 @@
 import axios from 'axios';
 const API_URL = process.env.REACT_APP_API_URL;
 
+const requestOptions = {
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+  },
+  proxy: {
+    host: '127.0.0.1',
+    port: 3000,
+  },
+  transformResponse: (r: string) => JSON.parse(r), // WARNING - MIRAGE vs REAL BACKEND Possible error
+};
+
 interface ServerResponse {
   data: Array<TickerPrice>;
 }
 
-export interface TickerPriceBackend { // TODO move it elsewhere
+export interface TickerPriceBackend {
+  // TODO move it elsewhere
   name: string;
   date: number;
   open: string;
@@ -15,7 +27,8 @@ export interface TickerPriceBackend { // TODO move it elsewhere
   min: string;
 }
 
-export interface TickerPrice { // TODO move it elsewhere
+export interface TickerPrice {
+  // TODO move it elsewhere
   name: string;
   date: number;
   open: number;
@@ -29,16 +42,7 @@ type Ticker = TickerPriceBackend | TickerPrice;
 
 export const getPrices = (ticker: string) => {
   return axios
-    .get(`${API_URL}/stock-prices?${ticker}`, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-      proxy: {
-        host: '127.0.0.1',
-        port: 3000,
-      },
-      transformResponse: (r) => JSON.parse(r),
-    })
+    .get(`${API_URL}/stock-prices?${ticker}`, requestOptions)
     .then(response => {
       // TODO error handler
       return response.data.map((el: Ticker) => {
@@ -48,6 +52,19 @@ export const getPrices = (ticker: string) => {
         el.max = Number(el.max);
         return el;
       });
+    });
+};
+
+
+export interface User {
+  id: string;
+  name: string;
+  subscriptions: string[];
+}
+export const getUserData = (id: number) => {
+  return axios.get(`${API_URL}/user`, requestOptions)
+    .then(response => {
+      return response.data;
     });
 };
 

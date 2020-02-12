@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {makeLocalServer} from './api/localApi';
+
+if (process.env.REACT_APP_ENV === 'local') {
+  makeLocalServer()
+}
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

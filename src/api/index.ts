@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {Server} from 'miragejs';
 const API_URL = process.env.REACT_APP_API_URL;
 
 const requestOptions = {
@@ -10,22 +9,8 @@ const requestOptions = {
     host: '127.0.0.1',
     port: 3000,
   },
-  //transformResponse: (r: string) => JSON.parse(r), // WARNING - MIRAGE vs REAL BACKEND Possible error
+  transformResponse: (r: string) => JSON.parse(r), // WARNING - MIRAGE vs REAL BACKEND Possible error
 };
-
-new Server({
-  routes() {
-    this.urlPrefix = API_URL; // You can define your own api address
-    // this.namespace = 'api'; // Not using this, leaving for tutorial 
-
-    this.get('/user', () => {
-      return {
-        id: 3, name: 'Dunkirk', subscriptions: ['ENERGA', 'PGE'],
-      };
-    });
-    this.passthrough()
-  },
-});
 
 interface ServerResponse {
   data: Array<TickerPrice>;

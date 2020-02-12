@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import Chip from '@material-ui/core/Chip';
 import {User, getUserData} from 'api';
 
 interface FetchLoaded<T> {
@@ -26,11 +27,9 @@ export default function ClientPanel() {
         <div>
           <h4>Username: {userData.data.name}</h4>
           <p>Stock subscriptions:</p>
-          <ol>
-            {userData.data.subscriptions.map((tickerName, index) => {
-              return <li key={index}>{tickerName}</li>;
-            })}
-          </ol>
+          {userData.data.subscriptions.map((tickerName, index) => {
+            return <Chip key={index} label={tickerName} variant="outlined" color="primary" />;
+          })}
         </div>
       )}
     </React.Fragment>

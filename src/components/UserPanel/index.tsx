@@ -15,10 +15,24 @@ export default function ClientPanel() {
     loaded: false,
   });
   useEffect(() => {
-    getUserData(1).then(response => setUserData({loaded: true, data: response}));
-  }, [])
+    getUserData(1).then(response =>
+      setUserData({loaded: true, data: response}),
+    );
+  }, []);
 
   return (
-    <div>{ userData.loaded && 'kopytko' }</div>
+    <React.Fragment>
+      {userData.loaded && (
+        <div>
+          <h4>Username: {userData.data.name}</h4>
+          <p>Stock subscriptions:</p>
+          <ol>
+            {userData.data.subscriptions.map((tickerName, index) => {
+              return <li key={index}>{tickerName}</li>;
+            })}
+          </ol>
+        </div>
+      )}
+    </React.Fragment>
   );
 }

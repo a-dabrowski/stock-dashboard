@@ -10,7 +10,7 @@ const requestOptions = {
     host: '127.0.0.1',
     port: 3000,
   },
-  //transformResponse: (r: string) => JSON.parse(r),
+  //transformResponse: (r: string) => JSON.parse(r), // WARNING - MIRAGE vs REAL BACKEND Possible error
 };
 
 new Server({

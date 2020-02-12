@@ -8,6 +8,16 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import styled from 'styled-components';
+
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 30vh;
+`;
 
 interface FetchLoaded<T> {
   loaded: true;
@@ -23,13 +33,12 @@ function StockTable() {
   const [prices, setData] = useState<Api<TickerPrices>>({
     loaded: false,
   });
-  console.log(prices.loaded && prices.data, prices.loaded && prices.data[0]);
   useEffect(() => {
     getPrices('ENERGA').then(response =>
       setData({loaded: true, data: response}),
     );
   }, []);
-  return (
+  return prices.loaded ? (
     <Table>
       <TableHead>
         <TableRow>
@@ -42,20 +51,24 @@ function StockTable() {
           <TableCell>Volume</TableCell>
         </TableRow>
       </TableHead>
-    <TableBody>
-      {prices.loaded && prices.data.map((ticker, index) => (
-        <TableRow key={index}>
-          <TableCell>{ticker.name}</TableCell>
-          <TableCell>{ticker.date}</TableCell>
-          <TableCell>{ticker.open}</TableCell>
-          <TableCell>{ticker.close}</TableCell>
-          <TableCell>{ticker.min}</TableCell>
-          <TableCell>{ticker.max}</TableCell>
-          <TableCell>{ticker.volume}</TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
+      <TableBody>
+        {prices.data.map((ticker, index) => (
+          <TableRow key={index}>
+            <TableCell>{ticker.name}</TableCell>
+            <TableCell>{ticker.date}</TableCell>
+            <TableCell>{ticker.open}</TableCell>
+            <TableCell>{ticker.close}</TableCell>
+            <TableCell>{ticker.min}</TableCell>
+            <TableCell>{ticker.max}</TableCell>
+            <TableCell>{ticker.volume}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
     </Table>
+  ) : (
+    <LoaderWrapper>
+      <CircularProgress />
+    </LoaderWrapper>
   );
 }
 

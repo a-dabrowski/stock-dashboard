@@ -15,6 +15,20 @@ export function makeLocalServer() {
           subscriptions: ['ENERGA', 'PGE'],
         });
       });
+
+      this.get('/stock-prices', () => {
+        return JSON.stringify([
+          {
+            name: 'Energa',
+            date: Date.now(),
+            open: 3.5,
+            close: 6.8,
+            volume: 124,
+            max: 250,
+            min: 100,
+          },
+        ]);
+      });
       this.passthrough();
     },
   });

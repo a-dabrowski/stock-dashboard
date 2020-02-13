@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import format from 'date-fns/format'
 import styled from 'styled-components';
 
 const LoaderWrapper = styled.div`
@@ -34,9 +35,12 @@ function StockTable() {
     loaded: false,
   });
   useEffect(() => {
-    getPrices('ENERGA').then(response =>
-      setData({loaded: true, data: response}),
-    );
+    getPrices('ENERGA').then(response => {
+      response.map((ticker: TickerPrice) => {
+        ticker.formatDate = format(ticker.date, 'dd/MM/yyyy');
+      });
+      setData({loaded: true, data: response});
+    });
   }, []);
   return prices.loaded ? (
     <Table>
@@ -55,7 +59,7 @@ function StockTable() {
         {prices.data.map((ticker, index) => (
           <TableRow key={index}>
             <TableCell>{ticker.name}</TableCell>
-            <TableCell>{ticker.date}</TableCell>
+            <TableCell>{ticker.formatDate}</TableCell>
             <TableCell>{ticker.open}</TableCell>
             <TableCell>{ticker.close}</TableCell>
             <TableCell>{ticker.min}</TableCell>

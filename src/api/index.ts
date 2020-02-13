@@ -9,7 +9,7 @@ const requestOptions = {
     host: '127.0.0.1',
     port: 3000,
   },
-  transformResponse: (r: string) => JSON.parse(r), // WARNING - MIRAGE vs REAL BACKEND Possible error
+  transformResponse: (r: string) => JSON.parse(r), // TODO error response or blank returns JSON error
 };
 
 interface ServerResponse {
@@ -30,7 +30,8 @@ export interface TickerPriceBackend {
 export interface TickerPrice {
   // TODO move it elsewhere
   name: string;
-  date: number;
+  date: number | Date;
+  formatDate?: string;
   open: number;
   close: number;
   volume: number;

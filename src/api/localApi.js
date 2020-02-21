@@ -16,6 +16,14 @@ export function makeLocalServer() {
         });
       });
 
+      this.get('/stock/energa', () => {
+        return JSON.stringify({
+          name: 'Energa',
+          sellpoint: 'Electric energy',
+          clientType: 'B2B'
+        });
+      });
+
       this.get('/stock-prices', () => {
         return JSON.stringify([
           {

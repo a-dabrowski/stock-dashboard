@@ -12,6 +12,15 @@ const requestOptions = {
   transformResponse: (r: string) => JSON.parse(r), // TODO error response or blank returns JSON error
 };
 
+interface FetchLoaded<T> {
+  loaded: true;
+  data: T;
+}
+interface FetchWaiting {
+  loaded: false;
+}
+export type Api<T> = FetchLoaded<T> | FetchWaiting;
+
 interface ServerResponse {
   data: Array<TickerPrice>;
 }
@@ -55,6 +64,17 @@ export const getPrices = (ticker: string) => {
       });
     });
 };
+
+export interface TickerInfo {
+  name: string
+}
+
+export const getSingleStock = (tickerName: string) => {
+  return axios.get(`${API_URL}/stock`, requestOptions)
+    .then(response => {
+      return response.data;
+    });
+}
 
 
 export interface User {

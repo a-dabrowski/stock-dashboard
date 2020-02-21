@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {TickerPrice, getPrices} from 'api';
+import {Api, TickerPrice, getPrices} from 'api';
 import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -20,14 +20,6 @@ const LoaderWrapper = styled.div`
   height: 30vh;
 `;
 
-interface FetchLoaded<T> {
-  loaded: true;
-  data: T;
-}
-interface FetchWaiting {
-  loaded: false;
-}
-type Api<T> = FetchLoaded<T> | FetchWaiting;
 type TickerPrices = Array<TickerPrice>;
 
 function StockTable() {

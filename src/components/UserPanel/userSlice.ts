@@ -12,6 +12,6 @@ export const slice = createSlice({
   }
 });
 
-export const selectDisplayName = (state: any) : string => state.displayName;
+export const selectDisplayName = (state: any) : string => state.user.displayName;
 export const { changeDisplayName } = slice.actions
 export default slice.reducer;

@@ -1,5 +1,10 @@
 # Changelog for Stock Dashboard
 
+## 2020-03-14 - 0.2.1
+
+- Init pages structure
+- Use code splitting feature of react for app pages
+
 ## 2020-03-09 - 0.2.0
 
 - Add Redux simple counter with config

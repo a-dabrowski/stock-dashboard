@@ -14,7 +14,7 @@ const SingleStock = lazy(() => import('pages/singleStock'));
 const UserPanel = lazy(() => import('pages/user'));
 
 const routes: React.FC = () => (
-  <Suspense fallback={NotFound}>
+  <Suspense fallback={<NotFound />}>
     <Switch>
       <Route path="/403" component={Forbidden} />
       <Route path="/analytics" component={Analytics} />

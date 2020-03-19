@@ -4,6 +4,7 @@ export const slice = createSlice({
   name: 'user',
   initialState: {
     displayName: 'No custom name',
+    isLoggedIn: true,
   },
   reducers: {
     changeDisplayName: (state, action) => {
@@ -13,5 +14,6 @@ export const slice = createSlice({
 });
 
 export const selectDisplayName = (state: any) : string => state.user.displayName;
+export const selectIsLoggedIn = (state: any) : boolean => state.user.isLoggedIn;
 export const { changeDisplayName } = slice.actions
 export default slice.reducer;

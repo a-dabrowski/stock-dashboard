@@ -1,16 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {TickerPrice, getPrices} from 'api';
-import {makeStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import format from 'date-fns/format'
-import styled from 'styled-components';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { TickerPrice } from "api";
+
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
+import styled from "styled-components";
+
+import {
+  fetchStockData,
+  selectIsStockLoaded,
+  selectSingleStockData
+} from "./singleStockSlice";
 
 const LoaderWrapper = styled.div`
   display: flex;
@@ -20,29 +28,14 @@ const LoaderWrapper = styled.div`
   height: 30vh;
 `;
 
-interface FetchLoaded<T> {
-  loaded: true;
-  data: T;
-}
-interface FetchWaiting {
-  loaded: false;
-}
-type Api<T> = FetchLoaded<T> | FetchWaiting;
-type TickerPrices = Array<TickerPrice>;
-
 function StockTable() {
-  const [prices, setData] = useState<Api<TickerPrices>>({
-    loaded: false,
-  });
+  const dispatch = useDispatch();
+  const isDataLoaded = useSelector(selectIsStockLoaded);
+  const singleStockData = useSelector(selectSingleStockData);
   useEffect(() => {
-    getPrices('ENERGA').then(response => {
-      response.map((ticker: TickerPrice) => {
-        ticker.formatDate = format(ticker.date, 'dd/MM/yyyy');
-      });
-      setData({loaded: true, data: response});
-    });
-  }, []);
-  return prices.loaded ? (
+    dispatch(fetchStockData());
+  }, [dispatch]);
+  return isDataLoaded ? (
     <Table>
       <TableHead>
         <TableRow>
@@ -56,7 +49,7 @@ function StockTable() {
         </TableRow>
       </TableHead>
       <TableBody>
-        {prices.data.map((ticker, index) => (
+        {singleStockData.map((ticker: TickerPrice, index: number) => (
           <TableRow key={index}>
             <TableCell>{ticker.name}</TableCell>
             <TableCell>{ticker.formatDate}</TableCell>

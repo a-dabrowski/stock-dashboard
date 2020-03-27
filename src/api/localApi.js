@@ -1,4 +1,4 @@
-import {Server} from 'miragejs';
+import {Server, Response} from 'miragejs';
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -28,6 +28,14 @@ export function makeLocalServer() {
             min: 100,
           },
         ]);
+      });
+      this.put('/user/subscriptions', (schema, request) => {
+      const id = JSON.parse(request.requestBody).data;
+      console.log(id);
+        return new Response(
+          201,
+          {'Mirage-Source': 'src/api'}
+        );
       });
       this.passthrough();
     },

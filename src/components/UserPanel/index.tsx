@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Chip from "@material-ui/core/Chip";
-import { User, getUserData } from "api";
 import { useSelector, useDispatch } from "react-redux";
 import {
   changeDisplayName,
-  removeFavouriteTicker,
+  removeTickerSubscription,
   addFavouriteTicker,
   fetchFavouriteTickers,
   selectDisplayName,
@@ -38,7 +37,7 @@ export default function ClientPanel() {
                 label={tickerName}
                 variant="outlined"
                 color="primary"
-                onDelete={() => dispatch(removeFavouriteTicker(tickerName))}
+                onDelete={() => dispatch(removeTickerSubscription(tickerName))}
                 onClick={() => dispatch(addFavouriteTicker("PLAY"))}
               />
             );

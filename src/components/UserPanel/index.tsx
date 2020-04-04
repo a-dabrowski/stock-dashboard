@@ -1,48 +1,44 @@
-import React, {useEffect, useState} from 'react';
-import Chip from '@material-ui/core/Chip';
-import {User, getUserData} from 'api';
-import {useSelector, useDispatch} from 'react-redux';
-import {changeDisplayName, selectDisplayName} from './userSlice';
-
-interface FetchLoaded<T> {
-  loaded: true;
-  data: T;
-}
-interface FetchWaiting {
-  loaded: false;
-}
-type Api<T> = FetchLoaded<T> | FetchWaiting;
+import React, { useEffect } from "react";
+import Chip from "@material-ui/core/Chip";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeDisplayName,
+  removeTickerSubscription,
+  addFavouriteTicker,
+  fetchFavouriteTickers,
+  selectDisplayName,
+  selectUserName,
+  selectFavouriteTickers
+} from "./userSlice";
 
 export default function ClientPanel() {
   const displayName = useSelector(selectDisplayName);
+  const userName = useSelector(selectUserName);
+  const favouriteTickers = useSelector(selectFavouriteTickers);
   const dispatch = useDispatch();
-  const [userData, setUserData] = useState<Api<User>>({
-    loaded: false,
-  });
   useEffect(() => {
-    getUserData(1).then(response =>
-      setUserData({loaded: true, data: response}),
-    );
-  }, []);
+    dispatch(fetchFavouriteTickers());
+  }, [dispatch]);
 
   const setNameAsUsername = () => {
-    if (userData.loaded)
-      dispatch(changeDisplayName({newDisplayName: userData.data.name}));
+      dispatch(changeDisplayName({ newDisplayName: userName }));
   };
 
   return (
     <React.Fragment>
-      {userData.loaded && (
+      {favouriteTickers && (
         <div>
-          <h4>Username: {userData.data.name}</h4>
+          <h4>Username: {userName}</h4>
           <p>Stock subscriptions:</p>
-          {userData.data.subscriptions.map((tickerName, index) => {
+          {favouriteTickers.map((tickerName, index) => {
             return (
               <Chip
                 key={index}
                 label={tickerName}
                 variant="outlined"
                 color="primary"
+                onDelete={() => dispatch(removeTickerSubscription(tickerName))}
+                onClick={() => dispatch(addFavouriteTicker("PLAY"))}
               />
             );
           })}

@@ -1,15 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 const API_URL = process.env.REACT_APP_API_URL;
 
 const requestOptions = {
   headers: {
-    'Access-Control-Allow-Origin': '*',
+    "Access-Control-Allow-Origin": "*"
   },
   proxy: {
-    host: '127.0.0.1',
-    port: 3000,
+    host: "127.0.0.1",
+    port: 3000
   },
-  transformResponse: (r: string) => JSON.parse(r), // TODO error response or blank returns JSON error
+  transformResponse: (r: string) => JSON.parse(r) // TODO error response or blank returns JSON error
 };
 
 interface ServerResponse {
@@ -56,17 +56,24 @@ export const getPrices = (ticker: string) => {
     });
 };
 
-
 export interface User {
   id: string;
   name: string;
   subscriptions: string[];
 }
 export const getUserData = (id: number) => {
-  return axios.get(`${API_URL}/user`, requestOptions)
-    .then(response => {
-      return response.data;
-    });
+  return axios.get(`${API_URL}/user`, requestOptions).then(response => {
+    return response.data;
+  });
+};
+export const updateUserSubscriptions = (
+  id: number,
+  subscriptions: string[]
+) => {
+  return axios.put(`${API_URL}/user/subscriptions`, {
+    ...requestOptions,
+    data: { id, subscriptions }
+  });
 };
 
 export default API_URL;

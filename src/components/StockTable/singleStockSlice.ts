@@ -16,7 +16,6 @@ export const slice = createSlice({
     },
     stockDataReceived: (state, action) => {
       state.loaded = true;
-      console.log(action.payload);
       state.stockData = action.payload;
     }
   }

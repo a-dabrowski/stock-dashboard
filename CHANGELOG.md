@@ -1,5 +1,11 @@
 # Changelog for Stock Dashboard
 
+## 2020-04-01 - 0.2.2
+
+- Favourite tickers for user
+- Pages for 403 and 404
+- Risk aversion slider
+
 ## 2020-03-14 - 0.2.1
 
 - Init pages structure

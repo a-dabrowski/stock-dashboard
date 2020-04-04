@@ -41,9 +41,16 @@ export interface TickerPrice {
 
 type Ticker = TickerPriceBackend | TickerPrice;
 
-export const getPrices = (ticker: string) => {
+export const getPrices = (
+  ticker: string = "ENERGA",
+  startDate: string = "01-03-2020",
+  endDate: string = "31-03-2020"
+) => {
   return axios
-    .get(`${API_URL}/stock-prices?${ticker}`, requestOptions)
+    .get(
+      `${API_URL}/stock-prices?startDate=${startDate}&endDate=${endDate}&ticker=${ticker}`,
+      requestOptions
+    )
     .then(response => {
       // TODO error handler
       return response.data.map((el: Ticker) => {

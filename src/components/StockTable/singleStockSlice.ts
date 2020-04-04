@@ -27,7 +27,7 @@ export const { stockLoading, stockDataReceived } = slice.actions;
 
 export const fetchStockData = (): AppThunk => async dispatch => {
   dispatch(stockLoading());
-  const fetched = await getPrices('ENERGA');
+  const fetched = await getPrices('ENERGA', '01-03-2020', '31-03-2020');
   // TODO cases where it fails or hangs
   fetched.map((ticker: TickerPrice) => {
     ticker.formatDate = format(ticker.date, 'dd/MM/yyyy');

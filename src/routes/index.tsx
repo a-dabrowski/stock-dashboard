@@ -31,3 +31,4 @@ const routes: React.FC = () => (
 );
 
 export default routes;
+// TODO : dont route to components, only pages

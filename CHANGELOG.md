@@ -1,5 +1,9 @@
 # Changelog for Stock Dashboard
 
+## 2020-04-11 - 0.2.3
+
+- Chip click link to stock listing element
+
 ## 2020-04-01 - 0.2.2
 
 - Favourite tickers for user

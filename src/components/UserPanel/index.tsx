@@ -36,9 +36,11 @@ export default function ClientPanel() {
                 key={index}
                 label={tickerName}
                 variant="outlined"
+                component="a"
+                clickable
                 color="primary"
                 onDelete={() => dispatch(removeTickerSubscription(tickerName))}
-                onClick={() => dispatch(addFavouriteTicker("PLAY"))}
+                href={`/listing/${tickerName}`}
               />
             );
           })}

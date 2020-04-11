@@ -19,8 +19,8 @@ const routes: React.FC = () => (
       <Route path="/403" component={Forbidden} />
       <Route path="/analytics" component={Analytics} />
       <Route path="/heat-graph" component={HeatGraph} />
-      <Route path="/listing" component={Listing} />
       <Route path="/listing/:id" component={SingleStock} />
+      <Route path="/listing" component={Listing} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/stock-table" component={StockTable} />

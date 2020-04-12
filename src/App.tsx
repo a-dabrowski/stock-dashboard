@@ -9,7 +9,6 @@ const App: React.FC = () => {
     <Router>
       <div>
         <Routes />
-        <Navigation />
       </div>
     </Router>
   );

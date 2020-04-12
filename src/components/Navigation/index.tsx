@@ -23,30 +23,28 @@ export default function Navigation() {
       }}
       showLabels
     >
-      {isLoggedIn ? (
-        [
-          <BottomNavigationAction
-            value="/stock-table"
-            key="stock-table-route"
-            label="Stock Table"
-            icon={<RestoreIcon />}
-          />,
-          <BottomNavigationAction
-            value="/analytics"
-            key="analytics-route"
-            label="Analytics"
-            icon={<FavoriteIcon />}
-          />,
-          <BottomNavigationAction
-            value="/user"
-            key="user-route"
-            label="User Profile"
-            icon={<LocationOnIcon />}
-          />
-        ]
-      ) : (
-        ""
-      )}
+      {isLoggedIn
+        ? [
+            <BottomNavigationAction
+              value="/stock-table"
+              key="stock-table-route"
+              label="Stock Table"
+              icon={<RestoreIcon />}
+            />,
+            <BottomNavigationAction
+              value="/analytics"
+              key="analytics-route"
+              label="Analytics"
+              icon={<FavoriteIcon />}
+            />,
+            <BottomNavigationAction
+              value="/user"
+              key="user-route"
+              label="User Profile"
+              icon={<LocationOnIcon />}
+            />
+          ]
+        : ""}
     </BottomNavigation>
   );
 }

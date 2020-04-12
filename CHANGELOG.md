@@ -3,6 +3,7 @@
 ## 2020-04-12 - 0.2.3
 
 - Hide bottom navigation for pages not in-app
+- Chip click link to stock listing element
 
 ## 2020-04-01 - 0.2.2
 

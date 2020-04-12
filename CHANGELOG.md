@@ -1,5 +1,9 @@
 # Changelog for Stock Dashboard
 
+## 2020-04-12 - 0.2.3
+
+- Hide bottom navigation for pages not in-app
+
 ## 2020-04-01 - 0.2.2
 
 - Favourite tickers for user

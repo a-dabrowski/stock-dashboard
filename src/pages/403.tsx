@@ -37,7 +37,7 @@ const Forbidden = () => {
         <Typography variant="body1">
           The page you are looking for is not for your eyes, because you do not have sufficient permissions. Hey, it happens
         </Typography>
-        <Button variant="contained" color="primary" href="/stock-table">
+        <Button variant="contained" color="primary" href="/listing">
           Let's go see some stocks
         </Button>
       </Grid>

@@ -1,6 +1,5 @@
 import React, {Suspense, lazy} from 'react';
 import {Switch, Route} from 'react-router-dom';
-import StockTable from 'components/StockTable';
 import HeatGraph from 'components/HeatGraph';
 import Navigation from 'components/Navigation';
 
@@ -28,9 +27,8 @@ const routes: React.FC = () => (
     <Switch>
       <NavRoute path="/analytics" component={Analytics} />
       <NavRoute path="/heat-graph" component={HeatGraph} />
-      <NavRoute path="/listing" component={Listing} />
       <NavRoute path="/listing/:id" component={SingleStock} />
-      <NavRoute path="/stock-table" component={StockTable} />
+      <NavRoute path="/listing" component={Listing} />
       <NavRoute path="/user" component={UserPanel} />
       <Route exactly path="/login" component={Login} />
       <Route path="/register" component={Register} />

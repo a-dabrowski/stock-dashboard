@@ -26,8 +26,8 @@ export default function Navigation() {
       {isLoggedIn
         ? [
             <BottomNavigationAction
-              value="/stock-table"
-              key="stock-table-route"
+              value="/listing"
+              key="listing"
               label="Stock Table"
               icon={<RestoreIcon />}
             />,

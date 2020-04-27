@@ -12,6 +12,7 @@ const Login = lazy(() => import('pages/login'));
 const Register = lazy(() => import('pages/register'));
 const SingleStock = lazy(() => import('pages/singleStock'));
 const UserPanel = lazy(() => import('pages/user'));
+const Home = lazy(() => import('pages/home'));
 
 const NavRoute = ({ component: Component, ...rest }: any) => (
   <Route {...rest} render={(props: any) => (
@@ -33,6 +34,8 @@ const routes: React.FC = () => (
       <Route exactly path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/403" component={Forbidden} />
+      <Route path="/404" component={NotFound} />
+      <Route exactly path="/" component={Home} />
       <Route component={NotFound} />
     </Switch>
   </Suspense>

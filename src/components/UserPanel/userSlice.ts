@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from "store";
-import { User, getUserData, updateUserSubscriptions } from "api";
+import { User, getUserData, updateUserSubscriptions, saveRiskPreferenceToBackend } from "api";
 
 interface iUser {
   id: number;
@@ -8,6 +8,7 @@ interface iUser {
   subscriptions: string[];
   displayName: string;
   isLoggedIn: boolean;
+  savedRiskValue: number;
   riskValue: number;
 }
 
@@ -17,6 +18,7 @@ const initialStateUser: iUser = {
   displayName: "No custom name",
   isLoggedIn: true,
   subscriptions: ["ENERGA", "PGE"],
+  savedRiskValue: 0,
   riskValue: 0
 };
 
@@ -36,12 +38,16 @@ export const slice = createSlice({
     },
     changeRiskValue: (state, action) => {
       state.riskValue = action.payload;
+    },
+    changeSavedRiskValue: (state, action) => {
+      state.savedRiskValue = action.payload
     }
   }
 });
 
 export const selectDisplayName = (state: any): string => state.user.displayName;
 export const selectRiskValue = (state: any): number => state.user.riskValue;
+export const selectSavedRiskValue = (state: any): number => state.user.savedRiskValue;
 export const selectUserName = (state: any): string => state.user.name;
 export const selectFavouriteTickers = (state: any): string[] =>
   state.user.subscriptions;
@@ -51,7 +57,8 @@ export const {
   changeDisplayName,
   addFavouriteTicker,
   removeFavouriteTicker,
-  changeRiskValue
+  changeRiskValue,
+  changeSavedRiskValue
 } = slice.actions;
 
 export default slice.reducer;
@@ -63,6 +70,18 @@ export const fetchFavouriteTickers = (): AppThunk => async dispatch => {
 };
 
 // TODO export const saveClientDataToBackend = (): AppThunk => async dispatch
+
+export const saveRiskPreference = (riskValue : number) : AppThunk => async (dispatch, getState) => {
+  const userId = getState().user.id;
+  // TODO invoke loading status for button
+  const send = await saveRiskPreferenceToBackend(userId, riskValue);
+  if (send) {
+    // backend returns success, set redux
+    dispatch(changeSavedRiskValue(send.data.riskValue))
+  } else {
+    // TODO error in updating, dispatching
+  }
+}
 
 export const removeTickerSubscription = (
   tickerToDelete: string

@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import Chip from "@material-ui/core/Chip";
+import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
+import Typography from "@material-ui/core/Typography";
+import RoundedContainer from "components/RoundedContainer";
 import {
   changeDisplayName,
   removeTickerSubscription,
@@ -21,15 +24,26 @@ export default function ClientPanel() {
   }, [dispatch]);
 
   const setNameAsUsername = () => {
-      dispatch(changeDisplayName({ newDisplayName: userName }));
+    dispatch(changeDisplayName({ newDisplayName: userName }));
   };
 
   return (
     <React.Fragment>
+      <RoundedContainer>
+        <Typography variant="h5" component="h5">
+          Username: {userName}
+        </Typography>
+        <Typography variant="h6" component="h6">
+          Display name: {displayName}
+        </Typography>
+        <Typography variant="body1">Set name as username</Typography>
+        <Button variant="contained" color="primary" onClick={setNameAsUsername}>
+          Set Display Name to Username
+        </Button>
+      </RoundedContainer>
       {favouriteTickers && (
-        <div>
-          <h4>Username: {userName}</h4>
-          <p>Stock subscriptions:</p>
+        <RoundedContainer>
+          <Typography variant="body1">Stock subscriptions:</Typography>
           {favouriteTickers.map((tickerName, index) => {
             return (
               <Chip
@@ -44,12 +58,7 @@ export default function ClientPanel() {
               />
             );
           })}
-          <h6>Display name: {displayName}</h6>
-          <p>Set name as username</p>
-          <button onClick={setNameAsUsername}>
-            Set Display Name to Username
-          </button>
-        </div>
+        </RoundedContainer>
       )}
     </React.Fragment>
   );

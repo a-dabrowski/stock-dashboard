@@ -1,51 +1,44 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+import React from "react";
+import Typography from "@material-ui/core/Typography";
+import RoundedContainer from "components/RoundedContainer";
+import Slider from "@material-ui/core/Slider";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectRiskValue,
   changeRiskValue
 } from "components/UserPanel/userSlice";
 
-const useStyles = makeStyles({
-  root: {
-    width: 300,
-  },
-});
-
 const marks = [
   {
     value: -100,
-    label: 'Risk Averse',
+    label: "Averse"
   },
   {
     value: 0,
-    label: 'Risk Neutral',
+    label: "Neutral"
   },
   {
     value: 100,
-    label: 'Risk Seek',
-  },
+    label: "Seeking"
+  }
 ];
 
 function valueLabelFormat(value: number) {
-  const beta = '\u03B2';
-  return  `${beta} ${value / 100}`;
+  const beta = "\u03B2";
+  return `${beta} ${value / 100}`;
 }
 
 export default function DiscreteSlider() {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const riskPreference = useSelector(selectRiskValue);
-  const handleChange = (_event: any, newValue: number | number[]) : void => {
-    if(newValue !== riskPreference) {
+  const handleChange = (_event: any, newValue: number | number[]): void => {
+    if (newValue !== riskPreference) {
       dispatch(changeRiskValue(newValue));
     }
-  }
+  };
 
   return (
-    <div className={classes.root}>
+    <RoundedContainer>
       <Typography id="discrete-slider-restrict" gutterBottom>
         Select your risk attitude
       </Typography>
@@ -61,6 +54,6 @@ export default function DiscreteSlider() {
         marks={marks}
         onChange={handleChange}
       />
-    </div>
+    </RoundedContainer>
   );
 }

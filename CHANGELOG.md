@@ -1,5 +1,10 @@
 # Changelog for Stock Dashboard
 
+## 2020-05-16 0.2.4
+
+- RWD user panel
+- Skeleton single stock view
+
 ## 2020-04-12 - 0.2.3
 
 - Hide bottom navigation for pages not in-app

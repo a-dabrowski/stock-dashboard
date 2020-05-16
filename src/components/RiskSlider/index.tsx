@@ -1,11 +1,14 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import RoundedContainer from "components/RoundedContainer";
 import Slider from "@material-ui/core/Slider";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectRiskValue,
-  changeRiskValue
+  selectSavedRiskValue,
+  changeRiskValue,
+  saveRiskPreference
 } from "components/UserPanel/userSlice";
 
 const marks = [
@@ -31,10 +34,15 @@ function valueLabelFormat(value: number) {
 export default function DiscreteSlider() {
   const dispatch = useDispatch();
   const riskPreference = useSelector(selectRiskValue);
+  const savedRiskPreference = useSelector(selectSavedRiskValue);
   const handleChange = (_event: any, newValue: number | number[]): void => {
     if (newValue !== riskPreference) {
       dispatch(changeRiskValue(newValue));
     }
+  };
+
+  const handleSaveRiskClick = (_event: any): void => {
+    dispatch(saveRiskPreference(riskPreference));
   };
 
   return (
@@ -54,6 +62,17 @@ export default function DiscreteSlider() {
         marks={marks}
         onChange={handleChange}
       />
+      {riskPreference !== savedRiskPreference ? (
+        <Button
+          onClick={handleSaveRiskClick}
+          variant="outlined"
+          color="primary"
+        >
+          Save
+        </Button>
+      ) : (
+        ""
+      )}
     </RoundedContainer>
   );
 }

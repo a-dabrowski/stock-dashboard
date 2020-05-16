@@ -26,7 +26,7 @@ export default function RoundedContainer(props: any) {
   const matches = useMediaQuery('(min-width:400px)');
 
   return (
-    <div className={matches ? classes.root : classes.rootSmall}>
+    <div className={`${props.className} ${matches ? classes.root : classes.rootSmall}`}>
       {props.children}
     </div>
   );

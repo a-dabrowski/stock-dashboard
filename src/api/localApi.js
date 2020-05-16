@@ -29,12 +29,26 @@ export function makeLocalServer() {
           },
         ]);
       });
+
       this.put('/user/subscriptions', (schema, request) => {
       const id = JSON.parse(request.requestBody).data;
       console.log(id);
         return new Response(
           201,
           {'Mirage-Source': 'src/api'}
+        );
+      });
+
+      this.put('/user/risk', (schema, request) => {
+      const id = JSON.parse(request.requestBody).data.id;
+      const riskValue = JSON.parse(request.requestBody).data.riskValue;
+        return new Response(
+          201,
+          {'Mirage-Source': 'src/api'},
+          {
+            id,
+            riskValue
+          }
         );
       });
       this.passthrough();

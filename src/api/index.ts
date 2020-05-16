@@ -83,4 +83,10 @@ export const updateUserSubscriptions = (
   });
 };
 
+export const saveRiskPreferenceToBackend = (id: number, riskValue: number) => {
+  return axios.put(`${API_URL}/user/risk`, {
+    ...requestOptions,
+    data: { id, riskValue }
+  });
+};
 export default API_URL;

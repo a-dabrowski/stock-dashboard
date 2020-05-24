@@ -12,7 +12,7 @@ interface iUser {
   riskValue: number;
 }
 
-const initialStateUser: iUser = {
+export const initialStateUser: iUser = {
   id: 1,
   name: "Skrrt",
   displayName: "No custom name",

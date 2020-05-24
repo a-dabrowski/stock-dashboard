@@ -30,7 +30,9 @@ export const slice = createSlice({
       state.displayName = action.payload.newDisplayName;
     },
     addFavouriteTicker: (state, action) => {
-      state.subscriptions.push(action.payload);
+      if(action.payload) {
+        state.subscriptions.push(action.payload);
+      }
     },
     removeFavouriteTicker: (state, action) => {
       const target = state.subscriptions.indexOf(action.payload);

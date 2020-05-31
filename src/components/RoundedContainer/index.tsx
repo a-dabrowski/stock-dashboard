@@ -9,14 +9,14 @@ const useStyles = makeStyles(() =>
       borderRadius: 16,
       backgroundColor: "rgba(255, 255, 255, 0.95)",
       margin: "16px 8px",
-      padding: "16px 32px"
+      padding: "16px 24px"
     },
     rootSmall: {
       minWidth: 150,
       borderRadius: 16,
       backgroundColor: "#FFF",
       margin: "16px 8px",
-      padding: "16px 32px"
+      padding: "16px 24px"
     }
   })
 );

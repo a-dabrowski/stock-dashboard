@@ -4,6 +4,7 @@ import { TickerPrice } from "api";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
+import Button from "@material-ui/core/Button";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -36,7 +37,7 @@ function StockTable() {
     dispatch(fetchStockData());
   }, [dispatch]);
   return isDataLoaded ? (
-    <Table>
+    <Table size="small">
       <TableHead>
         <TableRow>
           <TableCell>Name</TableCell>
@@ -46,6 +47,7 @@ function StockTable() {
           <TableCell>Min</TableCell>
           <TableCell>Max</TableCell>
           <TableCell>Volume</TableCell>
+          <TableCell>Details</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
@@ -58,6 +60,9 @@ function StockTable() {
             <TableCell>{ticker.min}</TableCell>
             <TableCell>{ticker.max}</TableCell>
             <TableCell>{ticker.volume}</TableCell>
+            <TableCell>
+              <Button size="small" variant="contained" color="primary" href={`listing/${ticker.name}`}>Show</Button>
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>

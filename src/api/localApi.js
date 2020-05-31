@@ -31,11 +31,14 @@ export function makeLocalServer() {
       });
 
       this.put('/user/subscriptions', (schema, request) => {
-      const id = JSON.parse(request.requestBody).data;
-      console.log(id);
+      const data = JSON.parse(request.requestBody).data;
         return new Response(
           201,
-          {'Mirage-Source': 'src/api'}
+          {'Mirage-Source': 'src/api'},
+          {
+            id: data.id,
+            subscriptions: data.subscriptions
+          }
         );
       });
 

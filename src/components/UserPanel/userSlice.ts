@@ -35,8 +35,7 @@ export const slice = createSlice({
       }
     },
     removeFavouriteTicker: (state, action) => {
-      const target = state.subscriptions.indexOf(action.payload);
-      state.subscriptions = state.subscriptions.splice(target, 1);
+      state.subscriptions = state.subscriptions.filter(el => el !== action.payload);
     },
     changeRiskValue: (state, action) => {
       state.riskValue = action.payload;
@@ -90,8 +89,7 @@ export const removeTickerSubscription = (
 ): AppThunk => async (dispatch, getState) => {
   const userId = getState().user.id;
   const currentSubscriptions = [...getState().user.subscriptions];
-  const target = currentSubscriptions.indexOf(tickerToDelete);
-  const newSubscriptions = currentSubscriptions.splice(target, 1);
+  const newSubscriptions = currentSubscriptions.filter((el) => el !== tickerToDelete);
 
   const sentPutRequest = await updateUserSubscriptions(
     userId,

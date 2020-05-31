@@ -1,5 +1,12 @@
 # Changelog for Stock Dashboard
 
+## 2020-05-25 0.2.5
+
+- RWD for single stock page
+- Button Show on stock listing
+- Unit test on user panel
+- Update packages (vulnerability warning)
+
 ## 2020-05-16 0.2.4
 
 - RWD user panel

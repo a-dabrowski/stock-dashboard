@@ -1,8 +1,9 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
+import { useSelector } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import styled from "styled-components";
-import data from "./data";
+import { selectStockChartData } from 'components/StockChart/stockChartSlice';
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -70,6 +71,7 @@ const StockLineChart = (props: any) => (
                 padding: "3px 0"
               }}
             >
+              {props.data.length > 1 ? <div>{point.id.split(".")[0]}</div> : null}
               <div>Date: {point.data.xFormatted}</div>
               <div>Price: {point.data.yFormatted} PLN</div>
             </div>
@@ -86,10 +88,12 @@ const StockLineChart = (props: any) => (
   />
 );
 
-const WrappedStockLine = () => (
+const WrappedStockLine = () => {
+const stockData = useSelector(selectStockChartData);
+  return (
   <Wrapper>
-    <StockLineChart data={data} />
+    <StockLineChart data={stockData} />
   </Wrapper>
-);
+)};
 
 export default WrappedStockLine;

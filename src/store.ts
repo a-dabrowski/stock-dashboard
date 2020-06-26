@@ -2,6 +2,7 @@ import { configureStore, Action } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import counterReducer from './components/counter/counterSlice';
 import displayNameReducer from './components/UserPanel/userSlice';
+import stockChartDataReducer from './components/StockChart/stockChartSlice';
 import singleStockReducer from './components/StockTable/singleStockSlice';
 
 type RootState = any; // actually it is like the default configured reducer we export here
@@ -12,6 +13,7 @@ export default configureStore({
   reducer: {
     counter: counterReducer,
     user: displayNameReducer,
+    stockChart: stockChartDataReducer,
     singleStock: singleStockReducer,
   },
 });

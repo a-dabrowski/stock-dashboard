@@ -1,7 +1,6 @@
 {
   "name": "stock-dashboard",
-  "version": "0.2.5",
-  "private": true,
+  "version": "0.2.6",
   "dependencies": {
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",

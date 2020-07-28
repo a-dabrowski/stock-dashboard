@@ -1,6 +1,6 @@
 # Changelog for Stock Dashboard
 
-## 2020-05-25 0.2.6
+## 2020-07-28 0.2.6
 
 - RWD for stock table
 

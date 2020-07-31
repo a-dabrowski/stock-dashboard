@@ -1,5 +1,9 @@
 # Changelog for Stock Dashboard
 
+## 2020-07-28 0.2.7
+
+- Click on chip in settings shows stock in portal
+
 ## 2020-07-28 0.2.6
 
 - RWD for stock table

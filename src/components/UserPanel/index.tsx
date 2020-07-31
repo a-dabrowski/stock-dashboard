@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import RoundedContainer from "components/RoundedContainer";
+import Portal from "component/Portal";
+import {pushToPortal} from "redux-slices/portalSlice";
 import {
   changeDisplayName,
   removeTickerSubscription,
@@ -54,10 +57,16 @@ export default function ClientPanel() {
                 clickable
                 color="primary"
                 onDelete={() => dispatch(removeTickerSubscription(tickerName))}
+                onClick={() => {
+                  console.log('open');
+                  dispatch(pushToPortal(<RiskSlider/>));
+                  // dispatch open modal
+                }}
                 href={`/listing/${tickerName}`}
               />
             );
           })}
+          <Portal />
         </RoundedContainer>
       )}
     </React.Fragment>
